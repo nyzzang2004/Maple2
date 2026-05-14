@@ -9,11 +9,13 @@ using Maple2.Tools.Extensions;
 namespace Maple2.Server.Web.Packet;
 
 public static class InGameRankPacket {
+    private static string CurrentTimeKst() => DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9)).ToString("yyyy-MM-dd HH:mm:ss");
+
     public static ByteWriter Trophy(IList<TrophyRankInfo> rankInfos) {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.Trophy);
         pWriter.WriteInt(1); // Mode ?
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(rankInfos.Count);
         foreach (TrophyRankInfo info in rankInfos) {
             pWriter.WriteInt(info.Rank);
@@ -31,7 +33,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(rank);
 
         return pWriter;
@@ -41,7 +43,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.GuildTrophy);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(rankInfos.Count);
 
         foreach (GuildTrophyRankInfo info in rankInfos) {
@@ -63,7 +65,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(0); // rank
@@ -83,7 +85,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(0); // rank
@@ -100,7 +102,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -119,7 +121,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -138,7 +140,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.RaidEarlyVictory);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -165,7 +167,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.RaidShortestTime);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -183,7 +185,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(type);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -204,7 +206,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.FortressRumbleSRankClear);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -223,7 +225,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.FortressRumbleEarlyVictory);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -245,7 +247,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.FortressRumbleShortestTime);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank
@@ -266,7 +268,7 @@ public static class InGameRankPacket {
         var pWriter = new ByteWriter();
         pWriter.Write<GameRankingType>(GameRankingType.Colosseum);
         pWriter.WriteInt(0);
-        pWriter.WriteUnicodeStringWithLength(DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+        pWriter.WriteUnicodeStringWithLength(CurrentTimeKst());
         pWriter.WriteInt(1); // count
 
         pWriter.WriteInt(1); // rank

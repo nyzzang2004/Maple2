@@ -9,7 +9,7 @@ namespace Maple2.Model.Metadata;
 
 public static class Constant {
     #region custom constants
-    public const int ServerMaxCharacters = 8;
+    public const int ServerMaxCharacters = 25;
     public const int CharacterNameLengthMax = 12;
     public const long MaxMeret = long.MaxValue;
     public const long MaxMeso = long.MaxValue;
@@ -64,7 +64,7 @@ public static class Constant {
     public const int FishingRewardsMaxCount = 1;
     public const double FishingItemChance = 0.03;
     public const float FishingBigFishExpModifier = 1.5f;
-    public const int MaxMottoLength = 20;
+    public const int MaxMottoLength = 50;
     public const ItemTag BeautyHairSpecialVoucherTag = ItemTag.beauty_hair_special;
     public const ItemTag BeautyHairStandardVoucherTag = ItemTag.beauty_hair;
     public const ItemTag BeautyFaceVoucherTag = ItemTag.beauty_face;
@@ -121,7 +121,7 @@ public static class Constant {
     public const bool AllowUnicodeInNames = false; // Allow Unicode characters in character and guild names
     public const bool MailQuestItems = false; // Mail quest item rewards if inventory is full
     public const int MaxClosetMaxCount = 5;
-    public const int MaxClosetTabNameLength = 10;
+    public const int MaxClosetTabNameLength = 50;
     public const int CharacterNameLengthMin = 2;
     public const int BlockSize = 150;
     public const float SouthEast = 0;
