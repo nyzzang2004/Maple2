@@ -383,3 +383,4 @@ FodyWeavers.xsd
 .mcp.json
 CLAUDE.local.md
 telemetry-id
+.github/copilot-instructions.md
