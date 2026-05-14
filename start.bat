@@ -1,4 +1,7 @@
 @echo off
+set "SERVER_ROOT=C:\MS2Private\Server"
+cd /d "%SERVER_ROOT%"
+echo 빌드를 시작합니다.
 
 dotnet build
 
