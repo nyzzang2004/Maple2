@@ -11,7 +11,8 @@ public static class NavmeshHash {
             return false;
         }
 
-        string currentHash = System.IO.File.ReadAllText(hashPath);
+        var encoding = System.Text.Encoding.GetEncoding(949);
+        string currentHash = System.IO.File.ReadAllText(hashPath, encoding);
         string newHash = GetHash(filename);
 
         return currentHash.Equals(newHash);

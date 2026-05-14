@@ -7,7 +7,8 @@ public static class AiTranslate {
     private static readonly List<(string Kr, string En)> Lookup = new();
 
     static AiTranslate() {
-        using var reader = new StreamReader("Utils/ai_translate.csv");
+        var encoding = System.Text.Encoding.GetEncoding(949);
+        using var reader = new StreamReader("Utils/ai_translate.csv", encoding);
         using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
         csv.Read();
         csv.ReadHeader();
