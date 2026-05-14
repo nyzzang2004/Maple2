@@ -16,6 +16,9 @@ using Maple2.Tools;
 using Maple2.Tools.Extensions;
 using Microsoft.EntityFrameworkCore;
 
+// Register encoding provider for CP949 (Korean) and other code pages
+System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
+
 const string locale = "NA";
 string language = "en";
 const string env = "Live";
@@ -151,7 +154,7 @@ using var xmlReader = new M2dReader(xmlPath);
 using var exportedReader = new M2dReader(exportedPath);
 using var serverReader = new M2dReader(serverPath);
 
-string dataDbConnection = $"Server={server};Port={port};Database={database};User={user};Password={password};oldguids=true";
+string dataDbConnection = $"Server={server};Port={port};Database={database};User={user};Password={password};CharSet=utf8mb4;oldguids=true";
 
 DbContextOptions options = new DbContextOptionsBuilder()
     .UseMySql(dataDbConnection, ServerVersion.AutoDetect(dataDbConnection)).Options;
