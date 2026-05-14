@@ -218,8 +218,11 @@ public class PartyManager : IDisposable {
             return;
         }
 
-        Party.Vote = new PartyVote(PartyVoteType.ReadyCheck, Party.Members.Keys, characterId);
-        Party.LastVoteTime = DateTime.Now.ToEpochSeconds();
+        long voteTime = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9)).ToUnixTimeSeconds();
+        Party.Vote = new PartyVote(PartyVoteType.ReadyCheck, Party.Members.Keys, characterId) {
+            VoteTime = voteTime,
+        };
+        Party.LastVoteTime = voteTime;
         session.Send(PartyPacket.StartVote(Party.Vote));
     }
 
@@ -278,10 +281,11 @@ public class PartyManager : IDisposable {
             return;
         }
 
-        Party.LastVoteTime = DateTime.Now.ToEpochSeconds();
+        long voteTime = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9)).ToUnixTimeSeconds();
+        Party.LastVoteTime = voteTime;
         Party.Vote = new PartyVote(PartyVoteType.Kick, receiverIds, requestorId) {
             TargetMember = target,
-            VoteTime = Party.LastVoteTime,
+            VoteTime = voteTime,
         };
         session.Send(PartyPacket.StartVote(Party.Vote));
     }

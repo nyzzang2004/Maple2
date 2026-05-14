@@ -15,25 +15,31 @@ public static class TimeSyncPacket {
         Set = 3,
     }
 
+    private static DateTimeOffset ToKst(DateTimeOffset time) {
+        return time.ToOffset(TimeSpan.FromHours(9));
+    }
+
     public static ByteWriter Response(DateTimeOffset time, int key) {
+        time = ToKst(time);
         var pWriter = Packet.Of(SendOp.ResponseTimeSync);
         pWriter.Write<Command>(Command.Response);
         pWriter.WriteInt(Environment.TickCount);
         pWriter.WriteLong(time.ToUnixTimeSeconds()); // CMainSystem[28], CMainSystem[30]
         pWriter.WriteInt(time.Offset.Seconds);
-        pWriter.WriteByte(/*Timezone*/); // 0-24 Hours
+        pWriter.WriteByte((byte) time.Offset.Hours); // 0-24 Hours
         pWriter.WriteInt(key);
 
         return pWriter;
     }
 
     public static ByteWriter Reset(DateTimeOffset time) {
+        time = ToKst(time);
         var pWriter = Packet.Of(SendOp.ResponseTimeSync);
         pWriter.Write<Command>(Command.Reset);
         pWriter.WriteInt(Environment.TickCount);
         pWriter.WriteLong(time.ToUnixTimeSeconds()); // CMainSystem[28], CMainSystem[30]
         pWriter.WriteInt(time.Offset.Seconds);
-        pWriter.WriteByte(/*Timezone*/); // 0-24 Hours
+        pWriter.WriteByte((byte) time.Offset.Hours); // 0-24 Hours
 
         return pWriter;
     }

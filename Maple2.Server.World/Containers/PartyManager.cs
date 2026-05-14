@@ -284,7 +284,10 @@ public class PartyManager : IDisposable {
             return PartyError.s_party_err_not_chief;
         }
 
-        Party.Vote = new PartyVote(PartyVoteType.ReadyCheck, Party.Members.Keys, requestorId);
+        long voteTime = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9)).ToUnixTimeSeconds();
+        Party.Vote = new PartyVote(PartyVoteType.ReadyCheck, Party.Members.Keys, requestorId) {
+            VoteTime = voteTime,
+        };
         Broadcast(new PartyRequest {
             StartReadyCheck = new PartyRequest.Types.StartReadyCheck {
                 CharacterId = requestorId,
@@ -389,8 +392,10 @@ public class PartyManager : IDisposable {
         }
 
         ICollection<long> voters = Party.Members.Keys.Where(member => member != targetId).ToList();
+        long voteTime = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9)).ToUnixTimeSeconds();
         Party.Vote = new PartyVote(PartyVoteType.Kick, voters, requestorId) {
             TargetMember = target,
+            VoteTime = voteTime,
         };
 
         BroadcastVote(new PartyRequest {

@@ -285,8 +285,9 @@ public sealed partial class GameSession : Core.Network.Session {
 
         Send(SurvivalPacket.UpdateStats(player.Account));
 
-        Send(TimeSyncPacket.Reset(DateTimeOffset.UtcNow));
-        Send(TimeSyncPacket.Set(DateTimeOffset.UtcNow));
+        DateTimeOffset kstNow = DateTimeOffset.UtcNow.ToOffset(TimeSpan.FromHours(9));
+        Send(TimeSyncPacket.Reset(kstNow));
+        Send(TimeSyncPacket.Set(kstNow));
 
         Stats.Refresh();
 
